@@ -100,23 +100,6 @@ void Arbitrage::operator()(Event<Timer> const &event) {
   // XXX TODO process delayed order requests
 }
 
-void Arbitrage::operator()(Event<Control> const &event) {
-  auto &[message_info, control] = event;
-  log::info("[{}:{}] control={}"sv, message_info.source, message_info.source_name, control);
-  switch (control.action) {
-    using enum Action;
-    case UNDEFINED:
-      assert(false);
-      break;
-    case ENABLE:
-      dispatcher_(State::ENABLED);
-      break;
-    case DISABLE:
-      dispatcher_(State::DISABLED);
-      break;
-  }
-}
-
 void Arbitrage::operator()(Event<Connected> const &event) {
   check(event);
   auto &[message_info, connected] = event;
