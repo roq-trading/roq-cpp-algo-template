@@ -7,7 +7,7 @@
 ## Live
 
 ```bash
-roq-algo-playground --simulate=false --strategy_type "arbitrage" --strategy_parameters "max_age=10s;threshold=5;quantity_0=1;min_position_0=-5;max_position_0=5" \
+roq-cpp-algo-template --simulate=false --strategy_type "arbitrage" --strategy_parameters "max_age=10s;threshold=5;quantity_0=1;min_position_0=-5;max_position_0=5" \
   --name "trader" \
   --config_file "strategy.toml" \
   deribit.sock \
@@ -17,7 +17,7 @@ roq-algo-playground --simulate=false --strategy_type "arbitrage" --strategy_para
 ## Simulate
 
 ```bash
-roq-algo-playground --simulate=true --strategy_type "arbitrage" --strategy_parameters "max_age=10s;threshold=5;quantity_0=1;min_position_0=-5;max_position_0=5" \
+roq-cpp-algo-template --simulate=true --strategy_type "arbitrage" --strategy_parameters "max_age=10s;threshold=5;quantity_0=1;min_position_0=-5;max_position_0=5" \
   --name "trader" \
   --config_file "strategy.toml" \
   --simulator_config_file "simulator.toml" \

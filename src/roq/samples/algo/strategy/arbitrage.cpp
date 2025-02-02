@@ -533,6 +533,7 @@ void Arbitrage::check(Event<T> const &event) {
 
 // XXX FIXME TODO proper (for now, just testing simulator support)
 void Arbitrage::publish_statistics(Instrument &instrument) {
+  return;  // XXX FIXME TODO
   auto &top_of_book = instrument.top_of_book();
   std::array<Measurement, 4> measurements{{
       {
