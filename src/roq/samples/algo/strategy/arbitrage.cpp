@@ -119,6 +119,43 @@ void Arbitrage::operator()(Event<Disconnected> const &event) {
   // XXX TODO maybe cancel working orders on other sources?
 }
 
+void Arbitrage::operator()(Event<Control> const &event) {
+  auto &[message_info, control] = event;
+  log::info("[{}:{}] control"sv, message_info.source, message_info.source_name);
+  auto state = [&]() -> State {
+    switch (control.action) {
+      using enum Action;
+      case UNDEFINED:
+        return State::UNDEFINED;
+      case ENABLE:
+        return State::ENABLED;
+      case DISABLE:
+        return State::DISABLED;
+    }
+    std::abort();
+  }();
+  if (control.strategy_id) {
+    // XXX FIXME TODO check for legs update
+    auto strategy_update = StrategyUpdate{
+        .user = {},  // note! client library will set this
+        .strategy_id = control.strategy_id,
+        .description = {},  // note! client library will set this
+        .state = state,
+        .update_type = UpdateType::INCREMENTAL,
+    };
+    dispatcher_(strategy_update);
+  } else {
+    auto service_update = ServiceUpdate{
+        .user = {},               // note! client library will set this
+        .description = {},        // note! client library will set this
+        .connection_status = {},  // note! client library will set this
+        .state = state,
+        .update_type = UpdateType::INCREMENTAL,
+    };
+    dispatcher_(service_update);
+  }
+}
+
 void Arbitrage::operator()(Event<DownloadEnd> const &event) {
   check(event);
   auto &[message_info, download_end] = event;

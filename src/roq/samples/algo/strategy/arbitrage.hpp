@@ -49,6 +49,8 @@ struct Arbitrage final : public roq::algo::Strategy {
   void operator()(Event<Connected> const &) override;
   void operator()(Event<Disconnected> const &) override;
 
+  void operator()(Event<Control> const &) override;
+
   void operator()(Event<DownloadEnd> const &) override;
 
   void operator()(Event<Ready> const &) override;
