@@ -5,6 +5,7 @@ source=0
 account="A1"
 exchange="deribit"
 symbol="BTC-PERPETUAL"
+min_trade_vol = 1
 time_in_force="gtc"
 
 [[legs]]
