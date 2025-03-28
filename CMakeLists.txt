@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 4.0)
 
 # cmake
 
@@ -59,10 +59,10 @@ find_package(unordered_dense REQUIRED)
 
 # find python's site-packages https://stackoverflow.com/a/40006251
 
-message(PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE}")
+message("PYBIND11_PYTHON_EXECUTABLE_LAST=${PYBIND11_PYTHON_EXECUTABLE_LAST}")
 
 execute_process(
-  COMMAND "${PYTHON_EXECUTABLE}" -c "from distutils import sysconfig as sc; print(sc.get_python_lib(prefix='', plat_specific=True))"
+  COMMAND "${PYBIND11_PYTHON_EXECUTABLE_LAST}" -c "from distutils import sysconfig as sc; print(sc.get_python_lib(prefix='', plat_specific=True))"
   OUTPUT_VARIABLE PYTHON_SITE
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
