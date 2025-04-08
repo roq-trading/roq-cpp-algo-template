@@ -13,6 +13,25 @@ namespace roq {
 namespace samples {
 namespace algo {
 
+// === HELPERS ===
+
+namespace {
+void validate_params(auto &config, auto &params) {
+  uint8_t max_source = {};
+  for (auto &item : config.legs) {
+    assert(item.source < SOURCE_MAX);
+    max_source = std::max(max_source, item.source);
+  }
+  auto required = static_cast<size_t>(max_source) + 1;
+  if (std::size(params) != required) {
+    log::error("You must provide {} argument(s)! (got {})"sv, required, std::size(params));
+    log::error("  For live trading: paths to unix sockets (the .sock files created by the gateways)"sv);
+    log::error("  For simulation: paths to event-logs (the .roq files created by the gateways)"sv);
+    log::fatal("Unexpected"sv);
+  }
+}
+}  // namespace
+
 // === IMPLEMENTATION ===
 
 int Application::main(args::Parser const &args) {
@@ -21,14 +40,7 @@ int Application::main(args::Parser const &args) {
   Settings settings{args};
   Config config{settings};
 
-  auto size = std::size(static_cast<roq::algo::strategy::Config const &>(config).legs);
-
-  if (size > std::size(params)) {
-    log::error("You must provide at least {} argument(s)! (got {})"sv, size, std::size(params));
-    log::error("  For live trading: paths to unix sockets (the .sock files created by the gateways)"sv);
-    log::error("  For simulation: paths to event-logs (the .roq files created by the gateways)"sv);
-    log::fatal("Unexpected"sv);
-  }
+  validate_params(static_cast<roq::algo::strategy::Config const &>(config), params);
 
   Factory factory{settings, config};
 
