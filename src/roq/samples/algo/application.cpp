@@ -2,6 +2,10 @@
 
 #include "roq/samples/algo/application.hpp"
 
+#include <cassert>
+
+#include "roq/logging.hpp"
+
 #include "roq/utils/enum.hpp"
 
 #include "roq/client/simulator.hpp"
