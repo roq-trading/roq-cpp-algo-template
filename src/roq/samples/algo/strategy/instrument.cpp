@@ -13,8 +13,9 @@ namespace strategy {
 
 namespace {
 auto create_time_in_force(auto time_in_force) {
-  if (time_in_force == TimeInForce{})
+  if (time_in_force == TimeInForce{}) {
     return TimeInForce::GTC;
+  }
   return time_in_force;
 }
 }  // namespace
@@ -27,8 +28,9 @@ Instrument::Instrument(roq::algo::Leg const &leg, roq::algo::MarketDataSource ma
 }
 
 bool Instrument::is_ready(MessageInfo const &message_info, std::chrono::nanoseconds max_age) const {
-  if (order_state != OrderState::IDLE)
+  if (order_state != OrderState::IDLE) {
     return false;
+  }
   assert(order_id == 0);
   // XXX FIXME TODO check rate-limit throttling
   auto has_liquidity = [](auto price, auto quantity) { return !std::isnan(price) && !std::isnan(quantity) && quantity > 0.0; };
