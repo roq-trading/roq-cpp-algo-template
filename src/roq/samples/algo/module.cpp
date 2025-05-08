@@ -36,8 +36,8 @@ subtract
 // === HELPERS ===
 
 namespace {
-int add(int i, int j) {
-  return i + j;
+int add(int lhs, int rhs) {
+  return lhs + rhs;
 }
 
 auto const ADD_DOC = R"pbdoc(
@@ -53,20 +53,20 @@ std::unique_ptr<roq::algo::Reporter> create_my_reporter() {
 
 // === IMPLEMENTATION ===
 
-PYBIND11_MODULE(ROQ_PACKAGE_NAME, m) {
-  m.doc() = MODULE_DOC;
+PYBIND11_MODULE(ROQ_PACKAGE_NAME, module) {
+  module.doc() = MODULE_DOC;
 
-  m.def("add", &add, ADD_DOC);
+  module.def("add", &add, ADD_DOC);
 
-  m.def("create_my_reporter", &create_my_reporter);
+  module.def("create_my_reporter", &create_my_reporter);
 
-  m.def("foo", [](roq::Side side) { return roq::utils::invert(side); });
+  module.def("foo", [](roq::Side side) { return roq::utils::invert(side); });
 
 #ifdef VERSION_INFO
-  m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+  module.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
 #else
-  m.attr("__version__") = "dev";
+  module.attr("__version__") = "dev";
 #endif
 
-  auto m2 = py::module::import("roq");
+  [[maybe_unused]] auto module_2 = py::module::import("roq");
 }
