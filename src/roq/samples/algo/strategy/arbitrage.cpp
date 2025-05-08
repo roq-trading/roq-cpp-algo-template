@@ -35,7 +35,7 @@ auto create_market_data_type(auto &config) -> SupportType {
 
 template <typename R>
 auto create_instruments(auto &config, auto &parameters) {
-  using result_type = std::remove_cvref<R>::type;
+  using result_type = std::remove_cvref_t<R>;
   result_type result;
   auto size = std::size(config.legs);
   assert(size >= 2);
@@ -50,7 +50,7 @@ auto create_instruments(auto &config, auto &parameters) {
 
 template <typename R>
 auto create_sources(auto &instruments) {
-  using result_type = std::remove_cvref<R>::type;
+  using result_type = std::remove_cvref_t<R>;
   result_type result;
   auto max_source = [&]() {
     size_t result = {};
@@ -61,14 +61,14 @@ auto create_sources(auto &instruments) {
   }();
   auto size = max_source + 1;
   // accounts
-  using accounts_type = std::remove_cvref<decltype(result_type::value_type::accounts)>::type;
+  using accounts_type = std::remove_cvref_t<decltype(result_type::value_type::accounts)>;
   std::vector<accounts_type> tmp_1(size);
   for (size_t i = 0; i < std::size(instruments); ++i) {
     auto &item = instruments[i];
     tmp_1[item.source].try_emplace(item.account);
   }
   // instruments
-  using instruments_type = std::remove_cvref<decltype(result_type::value_type::instruments)>::type;
+  using instruments_type = std::remove_cvref_t<decltype(result_type::value_type::instruments)>;
   std::vector<instruments_type> tmp_2(size);
   for (size_t i = 0; i < std::size(instruments); ++i) {
     auto &item = instruments[i];
@@ -138,7 +138,7 @@ void Arbitrage::operator()(Event<Control> const &event) {
     }
     std::abort();
   }();
-  if (control.strategy_id) {
+  if (control.strategy_id != 0) {
     // XXX FIXME TODO check for legs update
     auto strategy_update = StrategyUpdate{
         .user = {},  // note! client library will set this
@@ -594,6 +594,8 @@ void Arbitrage::check(Event<T> const &event) {
       value);
 }
 
+// NOLINTBEGIN(readability-magic-numbers)
+
 // XXX FIXME TODO proper (for now, just testing simulator support)
 void Arbitrage::publish_statistics(Instrument &instrument) {
   return;  // XXX FIXME TODO
@@ -649,6 +651,8 @@ void Arbitrage::publish_statistics(Instrument &instrument) {
   };
   dispatcher_.send(custom_matrix, publish_source_);
 }
+
+// NOLINTEND(readability-magic-numbers)
 
 }  // namespace strategy
 }  // namespace algo
