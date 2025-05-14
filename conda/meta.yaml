@@ -22,12 +22,12 @@ requirements:
     - roq-autogen
     - setuptools
   host:
-    - python
-    - setuptools
     - catch2
     - fmt
     - libabseil
+    - magic_enum
     - pybind11
+    - python
     - roq-algo
     - roq-api
     - roq-cache
@@ -38,11 +38,11 @@ requirements:
     - roq-logging
     - roq-market
     - roq-oss-benchmark
-    - roq-oss-magic_enum
     - roq-oss-nameof
     - roq-oss-unordered_dense
     - roq-python-core
     - roq-utils
+    - setuptools
     - tomlplusplus
   run:
     - python
