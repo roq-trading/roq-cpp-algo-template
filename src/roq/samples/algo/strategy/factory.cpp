@@ -21,6 +21,12 @@ namespace samples {
 namespace algo {
 namespace strategy {
 
+// === constants ===
+
+namespace {
+auto const DEFAULT_MAX_AGE = 10s;
+}
+
 // === HELPERS ===
 
 namespace {
@@ -46,7 +52,7 @@ auto parameters_from_string(auto &parameters) {
         utils::variant::parse(result.market_data_source, value);
         break;
       case Key::MAX_AGE:
-        result.max_age = 10s;  // XXX FIXME TODO parse period
+        result.max_age = DEFAULT_MAX_AGE;  // XXX FIXME TODO parse period
         break;
       case Key::THRESHOLD:
         utils::variant::parse(result.threshold, value);
