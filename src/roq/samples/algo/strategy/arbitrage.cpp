@@ -301,6 +301,8 @@ void Arbitrage::operator()(Event<OrderAck> const &event, cache::Order const &) {
   }
 }
 
+// NOLINTBEGIN(readability-function-cognitive-complexity)
+
 void Arbitrage::operator()(Event<OrderUpdate> const &event, cache::Order const &) {
   check(event);
   if (is_mine(event)) {
@@ -360,6 +362,8 @@ void Arbitrage::operator()(Event<OrderUpdate> const &event, cache::Order const &
     get_account_and_instrument(event, callback);
   }
 }
+
+// NOLINTEND(readability-function-cognitive-complexity)
 
 void Arbitrage::operator()(Event<TradeUpdate> const &event, cache::Order const &) {
   check(event);
