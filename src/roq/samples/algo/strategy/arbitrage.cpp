@@ -537,6 +537,7 @@ void Arbitrage::maybe_trade_spread(MessageInfo const &, Side side, Instrument &l
         .quantity = quantity,
         .price = price,
         .stop_price = NaN,
+        .leverage = NaN,
         .routing_id = {},
         .strategy_id = strategy_id_,
     };
