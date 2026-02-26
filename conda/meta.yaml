@@ -37,7 +37,7 @@ requirements:
     - roq-io
     - roq-logging
     - roq-market
-    - roq-oss-benchmark
+    - benchmark
     - roq-oss-nameof
     - roq-oss-unordered_dense
     - roq-python-core
