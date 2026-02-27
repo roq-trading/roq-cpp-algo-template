@@ -22,6 +22,7 @@ requirements:
     - roq-autogen
     - setuptools
   host:
+    - benchmark
     - catch2
     - fmt
     - libabseil
@@ -37,7 +38,6 @@ requirements:
     - roq-io
     - roq-logging
     - roq-market
-    - benchmark
     - roq-oss-nameof
     - roq-oss-unordered_dense
     - roq-python-core
@@ -45,6 +45,7 @@ requirements:
     - setuptools
     - tomlplusplus
   run:
+    - benchmark
     - python
 
 about:
