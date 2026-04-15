@@ -39,11 +39,11 @@ requirements:
     - roq-logging
     - roq-market
     - roq-oss-nameof
-    - roq-oss-unordered_dense
     - roq-python-core
     - roq-utils
     - setuptools
     - tomlplusplus
+    - unordered_dense
   run:
     - benchmark
     - python
