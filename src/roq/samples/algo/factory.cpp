@@ -20,8 +20,8 @@ namespace algo {
 
 // === IMPLEMENTATION ===
 
-Factory::Factory(Settings const &settings, Config const &config)
-    : settings_{settings}, config_{config}, strategy_type_{utils::parse_enum<roq::algo::strategy::Type>(settings_.strategy_type)},
+Factory::Factory(Settings const &settings, Config const &)
+    : settings_{settings}, strategy_type_{utils::parse_enum<roq::algo::strategy::Type>(settings_.strategy_type)},
       matcher_type_{utils::parse_enum<decltype(matcher_type_)>(settings.simulation.matcher_type)},
       market_data_source_{utils::parse_enum<decltype(market_data_source_)>(settings.simulation.market_data_source)} {
 }

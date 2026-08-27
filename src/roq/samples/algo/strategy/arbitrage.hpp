@@ -130,12 +130,10 @@ struct Arbitrage final : public roq::algo::Strategy {
   uint32_t const strategy_id_;
   std::chrono::nanoseconds const max_age_;  // used when exchange doesn't support trading status
   double const threshold_;                  // abs(spread) must exceed this threshold
-  double const quantity_0_;
   double const min_position_0_;
   double const max_position_0_;
   uint8_t const publish_source_;
   SupportType const market_data_type_;
-  roq::algo::OrderCache &order_cache_;
   std::vector<Instrument> instruments_;
   std::vector<Source> sources_;
   uint64_t max_order_id_ = {};

@@ -87,11 +87,11 @@ auto create_sources(auto &instruments) {
 // === IMPLEMENTATION ===
 
 Arbitrage::Arbitrage(
-    roq::algo::Strategy::Dispatcher &dispatcher, roq::algo::OrderCache &order_cache, roq::algo::strategy::Config const &config, Parameters const &parameters)
+    roq::algo::Strategy::Dispatcher &dispatcher, roq::algo::OrderCache &, roq::algo::strategy::Config const &config, Parameters const &parameters)
     : dispatcher_{dispatcher}, strategy_id_{config.strategy_id}, max_age_{parameters.max_age}, threshold_{parameters.threshold},
-      quantity_0_{parameters.quantity_0}, min_position_0_{parameters.min_position_0}, max_position_0_{parameters.max_position_0},
-      publish_source_{parameters.publish_source}, market_data_type_{create_market_data_type(parameters)}, order_cache_{order_cache},
-      instruments_{create_instruments<decltype(instruments_)>(config, parameters)}, sources_{create_sources<decltype(sources_)>(instruments_)} {
+      min_position_0_{parameters.min_position_0}, max_position_0_{parameters.max_position_0}, publish_source_{parameters.publish_source},
+      market_data_type_{create_market_data_type(parameters)}, instruments_{create_instruments<decltype(instruments_)>(config, parameters)},
+      sources_{create_sources<decltype(sources_)>(instruments_)} {
   assert(!std::empty(instruments_));
   assert(!std::empty(sources_));
 }
