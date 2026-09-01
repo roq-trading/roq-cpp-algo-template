@@ -16,7 +16,7 @@ requirements:
     - python                              # [build_platform != target_platform]
     - clang-format
     - cmake
-    - coreutils                                                                                                                                                    
+    - coreutils
     - git
     - make
     - roq-autogen
