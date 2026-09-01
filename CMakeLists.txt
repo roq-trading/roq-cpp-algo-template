@@ -62,7 +62,7 @@ find_package(unordered_dense REQUIRED)
 message("PYBIND11_PYTHON_EXECUTABLE_LAST=${PYBIND11_PYTHON_EXECUTABLE_LAST}")
 
 execute_process(
-  COMMAND "${PYBIND11_PYTHON_EXECUTABLE_LAST}" -c "from distutils import sysconfig as sc; print(sc.get_python_lib(prefix='', plat_specific=True))"
+  COMMAND "${PYBIND11_PYTHON_EXECUTABLE_LAST}" -c "import sysconfig; print(sysconfig.get_path('platlib'))"
   OUTPUT_VARIABLE PYTHON_SITE
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
