@@ -533,6 +533,7 @@ void Arbitrage::maybe_trade_spread(MessageInfo const &, Side side, Instrument &l
         .order_type = OrderType::LIMIT,
         .time_in_force = instrument.time_in_force,
         .execution_instructions = {},
+        .execution_destination = {},
         .request_template = {},
         .quantity = quantity,
         .price = price,
